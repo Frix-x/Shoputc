@@ -1,12 +1,9 @@
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
-	<title>Shoputc</title>
-</head>
-
 <template name="mainLayout">
-    <h1>Shoputc</h1>
-    <div>
-        {{> yield}}
+    <div class="container">
+        {{> leftpanel}}
+        <div class="grid_8">
+            {{> navbar}}
+            {{> yield}}
+        </div>
     </div>
 </template>
