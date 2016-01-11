@@ -7,7 +7,9 @@ Template.login.events({
 		var password = $('input[name="nu_password"]').val();
 		var profile = {
             name: $('input[name="nu_name"]').val(),
-            lastname: $('input[name="nu_lastname"]').val()
+            lastname: $('input[name="nu_lastname"]').val(),
+            coloc: '',
+            debt: 0
 		};
 
 		var user = {

@@ -5,14 +5,14 @@
                 <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/boy-512.png" />
             </div>
             <div class="details">
-                <h2>Prénom Nom</h2>
-                <p>Nom de la colloc ici</p>
+                <h2>{{currentUser.profile.name}} {{currentUser.profile.lastname}}</h2>
+                <p>{{currentUser.profile.coloc}}</p>
                 <a href="#" class="btn btn-block btn-large logout">Déconnexion</a>
             </div>
         </section>
         <section class="box widget infos-perso">
             <header class="header">
-                <div class="temp">+ 42,5 €</div>
+                <div class="temp">{{currentUser.profile.debt}} €</div>
             </header>
             <article class="box post">
             <div class="details">

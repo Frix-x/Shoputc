@@ -190,6 +190,10 @@ input[type="text"]:focus {
     color: #dd5555;
 }
 
+.nav .active {
+    color: #dd5555;
+}
+
 .nav [class*="icon-"] {
     font-size: 2em;
     margin-bottom: 5px;
