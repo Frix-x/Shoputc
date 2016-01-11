@@ -1,10 +1,10 @@
 <template name="mainLayout">
     {{#if currentUser}}
         <div class="container">
-            {{> leftpanel}}
             <div class="grid_8">
                 {{> navbar}} {{> yield}}
             </div>
+            {{> rightpanel}}
         </div>
     {{else}}
         {{> login}}
