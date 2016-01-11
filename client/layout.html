@@ -1,9 +1,12 @@
 <template name="mainLayout">
-    <div class="container">
-        {{> leftpanel}}
-        <div class="grid_8">
-            {{> navbar}}
-            {{> yield}}
+    {{#if currentUser}}
+        <div class="container">
+            {{> leftpanel}}
+            <div class="grid_8">
+                {{> navbar}} {{> yield}}
+            </div>
         </div>
-    </div>
+    {{else}}
+        {{> login}}
+    {{/if}}
 </template>
