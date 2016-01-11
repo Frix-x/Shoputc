@@ -1,8 +1,25 @@
 <template name="coloc">
     <div class="inner_container">
         {{#if isInColoc}}
-            {{> colocs_my}}
+        <div class="col_1of1">
+            <article class="box post">
+                <div class="details">
+                    <h2>Ma coloc</h2>
+                    {{> colocs_my}}
+                </div>
+            </article>
+        </div>
         {{else}}
+        <div class="col_1of1">
+            <article class="box post">
+                <div class="details">
+                    <h2>Bienvenue</h2>
+                    <p>
+                        Tu n'as pas encore de coloc, tu as l'air perdu ! N'ai pas peur narvalo, c'est le moment de rejoindre celle de tes amis ou de créer la tienne !
+                    </p>
+                </div>
+            </article>
+        </div>
         <div class="col_2of3">
             <article class="box post">
                 <div class="details">
@@ -15,6 +32,8 @@
             <article class="box post">
                 <div class="details">
                     <h2>Créer une coloc</h2>
+                    <p>Tu n'es plus qu'à un doigt de créer ta nouvelle coloc, vas y !</p>
+                    <a href="#" class="btn btn-block btn-primary">C'est parti !</a>
                 </div>
             </article>
         </div>
@@ -23,20 +42,10 @@
 </template>
 
 <template name="colocs_my">
-    <div class="col_3of3">
-            <article class="box post">
-                <div class="details">
-                    <h2>Ma coloc</h2>
-                    <p>Chouette t'es dans une belle colloc, voici les infos !</p>
-                </div>
-            </article>
-        </div>
+    <p>Oh yeah trop stylé ma coloc !</p>
 </template>
 
 <template name="colocs_list">
-    <p>
-        Tu n'es pas encore dans une coloc, rejoins celle de tes amis ou créer en une tout de suite !
-    </p>
     <div class="wrapper">
         <div class="table">
             <div class="tablerow header">
@@ -58,7 +67,7 @@
                     {{ description }}
                 </div>
                 <div class="tablecell buttons">
-                    <a href="#" class="btn"><i class="zmdi zmdi-check"></i></a>
+                    <a href="#" class="btn btn-primary"><i class="zmdi zmdi-check"></i></a>
                 </div>
             </div>
             {{/each}}
