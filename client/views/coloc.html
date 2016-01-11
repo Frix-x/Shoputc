@@ -1,22 +1,67 @@
 <template name="coloc">
     <div class="inner_container">
-        <div class="col_1of1">
+        {{#if isInColoc}}
+            {{> colocs_my}}
+        {{else}}
+        <div class="col_2of3">
+            <article class="box post">
+                <div class="details">
+                    <h2>Rejoindre une coloc</h2>
+                    {{> colocs_list}}
+                </div>
+            </article>
+        </div>
+        <div class="col_1of3">
+            <article class="box post">
+                <div class="details">
+                    <h2>Créer une coloc</h2>
+                </div>
+            </article>
+        </div>
+        {{/if}}
+    </div>
+</template>
+
+<template name="colocs_my">
+    <div class="col_3of3">
             <article class="box post">
                 <div class="details">
                     <h2>Ma coloc</h2>
-                    {{#if isInColoc}}
-                    <p>
-                        Ouais niquel t'es dans une coloc, voilà les infos de celle-ci !
-                    </p>
-                    {{else}}
-                    <p>
-                        {{#each colocs}}
-                            {{ title }} - {{ description }}<br>
-                        {{/each}}
-                    </p>
-                    {{/if}}
+                    <p>Chouette t'es dans une belle colloc, voici les infos !</p>
                 </div>
             </article>
+        </div>
+</template>
+
+<template name="colocs_list">
+    <p>
+        Tu n'es pas encore dans une coloc, rejoins celle de tes amis ou créer en une tout de suite !
+    </p>
+    <div class="wrapper">
+        <div class="table">
+            <div class="tablerow header">
+                <div class="tablecell">
+                    Nom
+                </div>
+                <div class="tablecell">
+                    Description
+                </div>
+                <div class="tablecell">
+                </div>
+            </div>
+            {{#each colocs}}
+            <div class="tablerow">
+                <div class="tablecell">
+                    <b>{{ title }}</b>
+                </div>
+                <div class="tablecell">
+                    {{ description }}
+                </div>
+                <div class="tablecell buttons">
+                    <a href="#" class="btn"><i class="zmdi zmdi-check"></i></a>
+                </div>
+            </div>
+            {{/each}}
         </div>
     </div>
 </template>
