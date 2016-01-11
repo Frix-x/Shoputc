@@ -4,10 +4,17 @@
             <article class="box post">
                 <div class="details">
                     <h2>Ma coloc</h2>
+                    {{#if isInColoc}}
                     <p>
-                        TODO :<br>- Si pas de coloc : création ou rejoindre une coloc ici<br>
-                        - Si une coloc : Infos genre qui est dans la coloc + chat ?
+                        Ouais niquel t'es dans une coloc, voilà les infos de celle-ci !
                     </p>
+                    {{else}}
+                    <p>
+                        {{#each colocs}}
+                            {{ title }} - {{ description }}<br>
+                        {{/each}}
+                    </p>
+                    {{/if}}
                 </div>
             </article>
         </div>
