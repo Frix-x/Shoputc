@@ -4,8 +4,7 @@
         <div class="col_1of1">
             <article class="box post">
                 <div class="details">
-                    <h2>Ma coloc</h2>
-                    {{> colocs_my}}
+                    <h2>Ma coloc</h2> {{> colocs_my}}
                 </div>
             </article>
         </div>
@@ -23,8 +22,7 @@
         <div class="col_2of3">
             <article class="box post">
                 <div class="details">
-                    <h2>Rejoindre une coloc</h2>
-                    {{> colocs_list}}
+                    <h2>Rejoindre une coloc</h2> {{> colocs_list}}
                 </div>
             </article>
         </div>
@@ -75,19 +73,24 @@
     </div>
 </template>
 
-<template name="modal-newcoloc">
-  <div class="anti-modal-box">
-    <div class="anti-modal-header">
-      <div class="anti-modal-title">Nouvelle coloc</div>
-      <div class="anti-modal-closer"><i class="zmdi zmdi-close zmdi-hc-lg"></i></div>
-    </div>
-    <div class="anti-modal-body">
-        <section class="box widget form-box">
-            <input type="text" name="find" placeholder="Find your city place" />
-        </section>
-        <div class="wrapper-right">
-            <a href="#" class="btn btn-primary">Créer</a>
+<template name="modalNewColoc">
+    <div class="anti-modal-box">
+        <div class="anti-modal-header">
+            <div class="anti-modal-title">Nouvelle coloc</div>
+            <div class="anti-modal-closer"><i class="zmdi zmdi-close zmdi-hc-lg"></i></div>
+        </div>
+        <div class="anti-modal-body">
+            <section class="box widget form-box">
+                {{#autoForm collection="Colocs" id="newColocForm" type="insert"}}
+                <fieldset>
+                    {{> afQuickField name='title'}} {{> afQuickField name='description'}}
+                    {{> afQuickField name="mates" type="hidden" value=defaultMatesTab}}
+                </fieldset>
+                {{/autoForm}}
+            </section>
+            <div class="wrapper-right">
+                <a href="#" id="createNewColoc" class="btn btn-primary">Créer</a>
+            </div>
         </div>
     </div>
-  </div>
 </template>
