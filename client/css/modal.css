@@ -2,7 +2,7 @@
     border-radius: 5px;
     overflow: hidden;
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.75em;
+    font-size: 1em;
     color: #7d7d7d;
 }
 
@@ -18,6 +18,6 @@
 }
 
 .anti-modal-overlay .anti-modal-box {
-  border: 0;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 0;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1);
 }

@@ -20,3 +20,5 @@ iron:router
 accounts-password
 johnantoni:meteor-normalize
 anti:modals
+aldeed:autoform
+aldeed:collection2
