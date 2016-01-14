@@ -32,7 +32,6 @@ Template.modalNewColoc.helpers({
 Template.modalNewColoc.events({
     'click #createNewColoc': function(e, t) {
         $('#newColocForm').submit();
-        AntiModals.dismissOverlay($('.anti-modal-box'));
     }
 });
 
@@ -40,6 +39,7 @@ AutoForm.hooks({
     newColocForm: {
         onSuccess: function(ft, r) {
             Meteor.call("insertColocInUser", r);
+            AntiModals.dismissOverlay($('.anti-modal-box'));
         }
     }
 });
