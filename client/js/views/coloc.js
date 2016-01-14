@@ -36,9 +36,13 @@ Template.modalNewColoc.events({
 });
 
 AutoForm.hooks({
-  newColocForm: {
-      onSuccess: function(ft, r) {
-          //TODO : call server method to insert r and coloc name in user profile
-      }
-  }
+    newColocForm: {
+        onSuccess: function(ft, r) {
+            Meteor.call("insertColocInUser", r, function(err, id) {
+                if (err) {
+                    alert(err.reason);
+                }
+            });
+        }
+    }
 });

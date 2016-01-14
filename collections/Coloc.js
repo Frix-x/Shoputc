@@ -7,16 +7,19 @@ Colocs.attachSchema(new SimpleSchema({
   title: {
     type: String,
     label: "Nom de la coloc",
-    max: 30
+    max: 30,
+    index: true,
+    unique: true
   },
   description: {
     type: String,
-    label: "Description rapide",
+    label: "Description rapide (optionnel)",
     optional: true
   },
   mates: {
-    type: [String]
+    type: [String],
+    regEx: SimpleSchema.RegEx.Id
   }
 }));
 
-Colocs.permit('insert').ifLoggedIn().apply();
+Colocs.permit('insert').ifIsNotInColoc().apply();
