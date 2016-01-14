@@ -6,8 +6,7 @@
             </div>
             <div class="details">
                 <h2>{{currentUser.profile.name}} {{currentUser.profile.lastname}}</h2>
-                <p>{{currentUser.profile.coloc}}</p>
-                <a href="#" class="btn btn-block btn-large logout">Déconnexion</a>
+                <p>{{currentUser.profile.coloc.[1]}}</p>
             </div>
         </section>
         <section class="box widget infos-perso">
@@ -15,12 +14,20 @@
                 <div class="temp">{{currentUser.profile.debt}} €</div>
             </header>
             <article class="box post">
-            <div class="details">
-                <h2>Infos perso</h2>
-                <p>Num : 0694586950 <br>Je suis cool.</p>
-                <h2>Compétences</h2>
-                <p>Je sais faire des pates sisi et aussi cuire les boites de conserves au micro-onde.</p>
-            </div>
+                <div class="details">
+                    <h2>Infos perso</h2>
+                    <p>Num : 0694586950
+                        <br>Je suis cool.</p>
+                    <h2>Compétences</h2>
+                    <p>Je sais faire des pates sisi et aussi cuire les boites de conserves au micro-onde.</p>
+                </div>
+            </article>
+        </section>
+        <section class="box widget infos-perso">
+            <article class="box post">
+                <div class="details">
+                    <a href="#" class="btn btn-block btn-large logout">Déconnexion</a>
+                </div>
             </article>
         </section>
     </div>

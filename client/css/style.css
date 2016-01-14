@@ -65,6 +65,11 @@ body {
     text-align: center;
 }
 
+.btn.btn-right  {
+    margin-left: auto;
+    margin-right: 0;
+}
+
 input[type="text"] {
     width: 100%;
     border: 1px solid #cfcfcf;
@@ -358,7 +363,7 @@ input[type="text"]:focus {
     bottom: 0px;
 }
 
-.find {
+.form-box {
     padding: 10px;
 }
 
@@ -440,4 +445,9 @@ input[type="text"]:focus {
 
 .hidden {
     display: none;
+}
+
+.wrapper-right {
+    float: right;
+    margin-bottom: 15px;
 }
