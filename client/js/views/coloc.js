@@ -1,5 +1,6 @@
 /* global AntiModals */
 /*global AutoForm */
+/* global Colocs */
 
 Template.coloc.helpers({
     isInColoc: function() {
@@ -38,11 +39,15 @@ Template.modalNewColoc.events({
 AutoForm.hooks({
     newColocForm: {
         onSuccess: function(ft, r) {
-            Meteor.call("insertColocInUser", r, function(err, id) {
-                if (err) {
-                    alert(err.reason);
-                }
-            });
+            Meteor.call("insertColocInUser", r);
         }
+    }
+});
+
+Template.colocs_list.events({
+    'click a': function(e, t) {
+        var colocId = e.toElement.dataset.id;
+        Colocs.update({_id: colocId}, { $push: { mates: Meteor.userId() } });
+        Meteor.call("insertColocInUser", colocId);
     }
 });

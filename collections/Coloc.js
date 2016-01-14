@@ -22,4 +22,5 @@ Colocs.attachSchema(new SimpleSchema({
   }
 }));
 
-Colocs.permit('insert').ifIsNotInColoc().apply();
+Colocs.permit('insert').ifLoggedIn().ifIsNotInColoc().apply();
+Colocs.permit('update').ifLoggedIn().ifIsNotInColoc().exceptProps(['title', 'description']).apply();
