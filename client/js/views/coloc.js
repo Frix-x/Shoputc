@@ -1,6 +1,7 @@
 /* global AntiModals */
-/*global AutoForm */
+/* global AutoForm */
 /* global Colocs */
+/* global CryptoJS */
 
 Template.coloc.helpers({
     isInColoc: function() {
@@ -37,6 +38,12 @@ Template.modalNewColoc.events({
 
 AutoForm.hooks({
     newColocForm: {
+        before: {
+            insert: function(doc) {
+                doc.password = CryptoJS.SHA256(doc.password).toString();
+                return doc;
+            }
+        },
         onSuccess: function(ft, r) {
             Meteor.call("insertColocInUser", r);
             AntiModals.dismissOverlay($('.anti-modal-box'));
@@ -47,7 +54,25 @@ AutoForm.hooks({
 Template.colocs_list.events({
     'click a': function(e, t) {
         var colocId = e.toElement.dataset.id;
-        Colocs.update({_id: colocId}, { $push: { mates: Meteor.userId() } });
-        Meteor.call("insertColocInUser", colocId);
+        AntiModals.prompt({
+            title: 'Rejoindre la coloc',
+            message: 'Mot de passe ?',
+            ok: 'C\'est parti !',
+            cancel: 'Annuler',
+            closer: false,
+        }, function(e, t) {
+            if (t != null) {
+                var hash = CryptoJS.SHA256(t.value).toString();
+                var colocMdp = Colocs.findOne({_id: colocId}).password;
+                if (colocMdp === hash) {
+                    Colocs.update({_id: colocId}, {$push: {mates: Meteor.userId()}});
+                    Meteor.call("insertColocInUser", colocId);
+                    //notify user for going into a coloc
+                }
+                else {
+                    //notify user for wrong password
+                }
+            }
+        });
     }
 });

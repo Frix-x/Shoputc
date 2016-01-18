@@ -11,6 +11,10 @@ Colocs.attachSchema(new SimpleSchema({
     index: true,
     unique: true
   },
+  password: {
+    type: String,
+    label: "Mot de passe"
+  },
   description: {
     type: String,
     label: "Description rapide (optionnel)",

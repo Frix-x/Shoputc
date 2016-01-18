@@ -82,8 +82,8 @@
         <div class="anti-modal-body">
             <section class="box widget form-box">
                 {{#autoForm collection="Colocs" id="newColocForm" type="insert"}}
-                    {{> afQuickField name='title'}} {{> afQuickField name='description'}}
-                    {{> afQuickField name="mates" type="hidden" value=defaultMatesTab}}
+                {{> afQuickField name='title'}} {{> afQuickField name='password'}} {{> afQuickField name='description'}}
+                {{> afQuickField name="mates" type="hidden" value=defaultMatesTab}}
                 {{/autoForm}}
             </section>
             <div class="wrapper-right">
