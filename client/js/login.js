@@ -1,4 +1,5 @@
 /* global Router*/
+/* global sAlert */
 
 Template.login.events({
     "click #go_register": function(e, t) {
@@ -20,7 +21,7 @@ Template.login.events({
 
 		Accounts.createUser(user, function(err) {
 			if (err) {
-				alert(err.reason)
+				sAlert.error(err.reason, {effect: 'bouncyflip', position: 'top-right', onRouteClose: false});
 			} else {
 				Router.go('home');
 			}
@@ -36,7 +37,7 @@ Template.login.events({
 
 		Meteor.loginWithPassword({email: user}, password, function(err) {
 			if (err) {
-				alert(err.reason)
+				sAlert.error(err.reason, {effect: 'bouncyflip', position: 'top-right', onRouteClose: false});
 			}
 		});
 	}

@@ -2,6 +2,7 @@
 /* global AutoForm */
 /* global Colocs */
 /* global CryptoJS */
+/* global sAlert */
 
 Template.coloc.helpers({
     isInColoc: function() {
@@ -47,6 +48,7 @@ AutoForm.hooks({
         onSuccess: function(ft, r) {
             Meteor.call("insertColocInUser", r);
             AntiModals.dismissOverlay($('.anti-modal-box'));
+            sAlert.success('Tu as créé une coloc avec brio mon coco !', {effect: 'bouncyflip', position: 'top-right', onRouteClose: false});
         }
     }
 });
@@ -67,10 +69,10 @@ Template.colocs_list.events({
                 if (colocMdp === hash) {
                     Colocs.update({_id: colocId}, {$push: {mates: Meteor.userId()}});
                     Meteor.call("insertColocInUser", colocId);
-                    //notify user for going into a coloc
+                    sAlert.success('Ca y est, t\'es dans une coloc ma cocotte !', {effect: 'bouncyflip', position: 'top-right', onRouteClose: false});
                 }
                 else {
-                    //notify user for wrong password
+                    sAlert.error('Mauvais mot de passe !', {effect: 'bouncyflip', position: 'top-right', onRouteClose: false});
                 }
             }
         });
