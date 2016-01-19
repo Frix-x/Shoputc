@@ -1,4 +1,5 @@
 .anti-modal-box {
+    max-width: 90%;
     border-radius: 5px;
     overflow: hidden;
     font-family: 'Montserrat', sans-serif;
