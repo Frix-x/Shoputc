@@ -1,14 +1,6 @@
 <template name="coloc">
     <div class="inner_container">
-        {{#if isInColoc}}
-        <div class="col_1of1">
-            <article class="box post">
-                <div class="details">
-                    {{> colocs_my}}
-                </div>
-            </article>
-        </div>
-        {{else}}
+        {{#if isInColoc}} {{> colocs_my}} {{else}}
         <div class="col_1of1">
             <article class="box post">
                 <div class="details">
@@ -40,8 +32,34 @@
 </template>
 
 <template name="colocs_my">
-    <h2>Ma coloc</h2>
-    <p>Oh yeah trop stylé ma coloc !</p>
+    <div class="col_1of1">
+        <article class="box post">
+            <div class="details">
+                <h2>Ma coloc</h2>
+                <p>Au cas où tu as un trou de mémoire...</p>
+                {{#each colocs}}
+                <p>
+                    Nom de la coloc : <b>{{ title }}</b>
+                    <br> Description : <b>{{ description }}</b>
+                </p>
+                {{/each}}
+            </div>
+        </article>
+    </div>
+    {{#if Template.subscriptionsReady}}
+    <div class="col_1of1">
+        <article class="box post">
+            <div class="details">
+                <h2>Messages</h2>
+                <p>
+                    ICI SALON DE CHAT
+                </p>
+            </div>
+        </article>
+    </div>
+    {{else}}
+        {{> loadingTemplate}}
+    {{/if}}
 </template>
 
 <template name="colocs_list">
@@ -82,10 +100,7 @@
         </div>
         <div class="anti-modal-body">
             <section class="box widget form-box">
-                {{#autoForm collection="Colocs" id="newColocForm" type="insert"}}
-                {{> afQuickField name='title'}} {{> afQuickField name='password'}} {{> afQuickField name='description'}}
-                {{> afQuickField name="mates" type="hidden" value=defaultMatesTab}}
-                {{/autoForm}}
+                {{#autoForm collection="Colocs" id="newColocForm" type="insert"}} {{> afQuickField name='title'}} {{> afQuickField name='password'}} {{> afQuickField name='description'}} {{> afQuickField name="mates" type="hidden" value=defaultMatesTab}} {{/autoForm}}
             </section>
             <div class="wrapper-right">
                 <a href="#" id="createNewColoc" class="btn btn-primary">Créer</a>

@@ -78,3 +78,7 @@ Template.colocs_list.events({
         });
     }
 });
+
+Template.colocs_my.onCreated(function(){
+    this.subscribe("colocMessages");
+});
