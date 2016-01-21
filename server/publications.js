@@ -20,7 +20,7 @@ Meteor.publish("myColoc", function() {
 });
 
 Meteor.publish("colocMessages", function() {
-    var colocId = Colocs.find({
+    var colocId = Colocs.findOne({
         mates: {
             $elemMatch: {
                 $eq: this.userId
@@ -29,5 +29,13 @@ Meteor.publish("colocMessages", function() {
     })._id;
     return Messages.find({
         coloc: colocId
+    });
+});
+
+Meteor.publish("allUsersProfile", function() {
+    return Meteor.users.find({}, {
+        fields: {
+            profile: 1
+        }
     });
 });

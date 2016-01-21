@@ -3,6 +3,8 @@
 /* global Colocs */
 /* global CryptoJS */
 /* global sAlert */
+/* global Messages */
+/* global moment */
 
 Template.coloc.helpers({
     isInColoc: function() {
@@ -48,7 +50,11 @@ AutoForm.hooks({
         onSuccess: function(ft, r) {
             Meteor.call("insertColocInUser", r);
             AntiModals.dismissOverlay($('.anti-modal-box'));
-            sAlert.success('Tu as créé une coloc avec brio mon coco !', {effect: 'bouncyflip', position: 'top-right', onRouteClose: false});
+            sAlert.success('Tu as créé une coloc avec brio mon coco !', {
+                effect: 'bouncyflip',
+                position: 'top-right',
+                onRouteClose: false
+            });
         }
     }
 });
@@ -65,20 +71,67 @@ Template.colocs_list.events({
         }, function(e, t) {
             if (t != null) {
                 var hash = CryptoJS.SHA256(t.value).toString();
-                var colocMdp = Colocs.findOne({_id: colocId}).password;
+                var colocMdp = Colocs.findOne({
+                    _id: colocId
+                }).password;
                 if (colocMdp === hash) {
-                    Colocs.update({_id: colocId}, {$push: {mates: Meteor.userId()}});
+                    Colocs.update({
+                        _id: colocId
+                    }, {
+                        $push: {
+                            mates: Meteor.userId()
+                        }
+                    });
                     Meteor.call("insertColocInUser", colocId);
-                    sAlert.success('Ca y est, t\'es dans une coloc ma cocotte !', {effect: 'bouncyflip', position: 'top-right', onRouteClose: false});
+                    sAlert.success('Ca y est, t\'es dans une coloc ma cocotte !', {
+                        effect: 'bouncyflip',
+                        position: 'top-right',
+                        onRouteClose: false
+                    });
                 }
                 else {
-                    sAlert.error('Mauvais mot de passe !', {effect: 'bouncyflip', position: 'top-right', onRouteClose: false});
+                    sAlert.error('Mauvais mot de passe !', {
+                        effect: 'bouncyflip',
+                        position: 'top-right',
+                        onRouteClose: false
+                    });
                 }
             }
         });
     }
 });
 
-Template.colocs_my.onCreated(function(){
+Template.colocs_my.onCreated(function() {
     this.subscribe("colocMessages");
+    this.subscribe("allUsersProfile");
+});
+
+Template.msgTemplate.helpers({
+    recentMessages: function() {
+        return Messages.find({}, {
+            sort: {
+                createdAt: -1
+            },
+            limit: 100
+        }).fetch().reverse();
+    },
+    authorName: function() {
+        var userProfile = Meteor.users.findOne({ _id: this.author});
+        return userProfile.profile.name + ' ' + userProfile.profile.lastname;
+    }
+});
+
+Template.msgAdd.events({
+    'keydown input': function(e) {
+        if (e.which == 13) {
+            var message = document.getElementById('newMsg');
+            if (message.value != '') {
+                Messages.insert({
+                    content: message.value
+                });
+                document.getElementById('newMsg').value = '';
+                message.value = '';
+            }
+        }
+    }
 });

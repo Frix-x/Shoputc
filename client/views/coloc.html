@@ -51,15 +51,25 @@
         <article class="box post">
             <div class="details">
                 <h2>Messages</h2>
-                <p>
-                    ICI SALON DE CHAT
-                </p>
+                <div class="chatmsg">
+                    {{> msgTemplate}}
+                </div>
+                {{> msgAdd}}
             </div>
         </article>
     </div>
     {{else}}
         {{> loadingTemplate}}
     {{/if}}
+</template>
+
+<template name="msgTemplate">
+    {{#each recentMessages}}
+        <b>{{authorName}}</b> - {{livestamp createdAt}} : {{content}}<br>
+    {{/each}}
+</template>
+<template name="msgAdd">
+    <input type="text" id="newMsg" name="newMsg"/><button class="btn btn-block btn-primary">Envoyer</button>
 </template>
 
 <template name="colocs_list">
