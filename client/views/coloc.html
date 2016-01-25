@@ -1,6 +1,8 @@
 <template name="coloc">
     <div class="inner_container">
-        {{#if isInColoc}} {{> colocs_my}} {{else}}
+        {{#if isInColoc}}
+            {{> colocs_my}}
+        {{else}}
         <div class="col_1of1">
             <article class="box post">
                 <div class="details">
@@ -14,7 +16,8 @@
         <div class="col_2of3">
             <article class="box post">
                 <div class="details">
-                    <h2>Rejoindre une coloc</h2> {{> colocs_list}}
+                    <h2>Rejoindre une coloc</h2>
+                    {{> colocs_list}}
                 </div>
             </article>
         </div>
@@ -32,11 +35,11 @@
 </template>
 
 <template name="colocs_my">
-    <div class="col_1of1">
+    <div class="col_1of3">
         <article class="box post">
             <div class="details">
                 <h2>Ma coloc</h2>
-                <p>Au cas où tu as un trou de mémoire...</p>
+                <p>Au cas où tu as un petit trou de mémoire...</p>
                 {{#each colocs}}
                 <p>
                     Nom de la coloc : <b>{{ title }}</b>
@@ -47,14 +50,14 @@
         </article>
     </div>
     {{#if Template.subscriptionsReady}}
-    <div class="col_1of1">
+    <div class="col_2of3">
         <article class="box post">
             <div class="details">
                 <h2>Messages</h2>
+                {{> msgAdd}}
                 <div class="chatmsg">
                     {{> msgTemplate}}
                 </div>
-                {{> msgAdd}}
             </div>
         </article>
     </div>
@@ -65,11 +68,17 @@
 
 <template name="msgTemplate">
     {{#each recentMessages}}
-        <b>{{authorName}}</b> - {{livestamp createdAt}} : {{content}}<br>
+        <p class="{{typeMsg}}">
+            <b>{{authorName}}</b> - {{livestamp createdAt}}<br>
+        </p>
+        <p class="{{typeMsg}} bubble">
+            {{content}}
+        </p>
     {{/each}}
 </template>
 <template name="msgAdd">
-    <input type="text" id="newMsg" name="newMsg"/><button class="btn btn-block btn-primary">Envoyer</button>
+    <input type="text" id="newMsg" name="newMsg" class="chatinput" />
+    <a class="btn btn-primary">Envoyer</a>
 </template>
 
 <template name="colocs_list">

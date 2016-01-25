@@ -113,11 +113,21 @@ Template.msgTemplate.helpers({
                 createdAt: -1
             },
             limit: 100
-        }).fetch().reverse();
+        });
     },
     authorName: function() {
-        var userProfile = Meteor.users.findOne({ _id: this.author});
+        var userProfile = Meteor.users.findOne({
+            _id: this.author
+        });
         return userProfile.profile.name + ' ' + userProfile.profile.lastname;
+    },
+    typeMsg: function() {
+        if (this.author === Meteor.userId()) {
+            return "mymsg";
+        }
+        else {
+            return "othermsg";
+        }
     }
 });
 
@@ -132,6 +142,16 @@ Template.msgAdd.events({
                 document.getElementById('newMsg').value = '';
                 message.value = '';
             }
+        }
+    },
+    'click a': function(e) {
+        var message = document.getElementById('newMsg');
+        if (message.value != '') {
+            Messages.insert({
+                content: message.value
+            });
+            document.getElementById('newMsg').value = '';
+            message.value = '';
         }
     }
 });

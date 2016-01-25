@@ -92,6 +92,10 @@ input:focus {
     border: 1px solid #dd5555;
 }
 
+.chatinput {
+    width: 65%;
+}
+
 .checkbox {
     color: #ccc;
     text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.4);
@@ -471,4 +475,31 @@ input:focus {
 .wrapper-right {
     float: right;
     margin-bottom: 15px;
+}
+
+.chatmsg {
+    overflow: auto;
+    height: 300px;
+}
+
+.bubble {
+    border-radius: 5px;
+    background: #f2f2f2;
+    max-width: 100%;
+    word-break: break-all;
+}
+
+.mymsg {
+    float: right;
+    padding: 5px 10px 5px 10px;
+    margin: 0px 10px 5px 0px;
+    min-width: 51%;
+
+}
+
+.othermsg {
+    float: left;
+    padding: 5px 10px 5px 10px;
+    margin: 0px 0px 5px 10px;
+    min-width: 51%;
 }
