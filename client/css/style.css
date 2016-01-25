@@ -486,7 +486,6 @@ input:focus {
     border-radius: 5px;
     background: #f2f2f2;
     max-width: 100%;
-    word-break: break-all;
 }
 
 .mymsg {
