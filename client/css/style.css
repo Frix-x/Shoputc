@@ -479,7 +479,7 @@ input:focus {
 
 .chatmsg {
     overflow: auto;
-    height: 300px;
+    max-height: 300px;
 }
 
 .bubble {

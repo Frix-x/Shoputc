@@ -19,8 +19,7 @@ Messages.attachSchema(new SimpleSchema({
         type: Date
     },
     content: {
-        type: String,
-        max: 200
+        type: String
     },
     coloc: {
         type: String,
