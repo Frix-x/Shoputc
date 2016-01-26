@@ -5,6 +5,8 @@
 /* global sAlert */
 /* global Messages */
 /* global moment */
+/* global Spacebars */
+/* global TimeSync */
 
 Template.coloc.helpers({
     isInColoc: function() {
@@ -102,11 +104,25 @@ Template.colocs_list.events({
 });
 
 Template.colocs_my.onCreated(function() {
-    this.subscribe("colocMessages");
     this.subscribe("allUsersProfile");
+    this.subscribe("colocMessages");
 });
 
 Template.msgTemplate.helpers({
+    breakLines: function(text) {
+        text = Blaze._escape(text);
+        text = text.replace(/(\r\n|\n|\r)/gm, '<br>');
+        return new Spacebars.SafeString(text);
+    },
+    livestamp: function(date) {
+        var time = moment(date);
+        if (!time.isValid()) {
+            time = moment(TimeSync.serverTime());
+        }
+        var timestamp = time.toISOString();
+        var timestring = time.from(TimeSync.serverTime());
+        return new Spacebars.SafeString('<span class="livestamp" data-livestamp="' + timestamp + '">' + timestring + '</span>');
+    },
     recentMessages: function() {
         return Messages.find({}, {
             sort: {
@@ -131,27 +147,41 @@ Template.msgTemplate.helpers({
     }
 });
 
-Template.msgAdd.events({
-    'keydown input': function(e) {
-        if (e.which == 13) {
-            var message = document.getElementById('newMsg');
-            if (message.value != '') {
-                Messages.insert({
-                    content: message.value
-                });
-                document.getElementById('newMsg').value = '';
-                message.value = '';
+function insertMessage(message){
+    if (message.value != '') {
+        var lastEntry = Messages.findOne({}, {
+            sort: {
+                createdAt: -1
             }
+        });
+        if ((lastEntry.author === Meteor.userId()) && (moment(moment(TimeSync.serverTime()).diff(lastEntry.createdAt)).format("mm") <= 3)) {
+            Messages.update({
+                _id: lastEntry._id
+            }, {
+                $set: {
+                    createdAt: new Date(TimeSync.serverTime()),
+                    content: lastEntry.content + '\n' + message.value
+                }
+            });
         }
-    },
-    'click a': function(e) {
-        var message = document.getElementById('newMsg');
-        if (message.value != '') {
+        else {
             Messages.insert({
+                createdAt: new Date(TimeSync.serverTime()),
                 content: message.value
             });
-            document.getElementById('newMsg').value = '';
-            message.value = '';
         }
+        document.getElementById('newMsg').value = '';
+        message.value = '';
+    }
+};
+
+Template.msgAdd.events({
+    'keydown input': function(e, t) {
+        if (e.which == 13) {
+            insertMessage(document.getElementById('newMsg'));
+        }
+    },
+    'click a': function(e, t) {
+        insertMessage(document.getElementById('newMsg'));
     }
 });

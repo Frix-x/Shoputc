@@ -1,4 +1,5 @@
 /* global Colocs */
+/* global Future */
 
 Meteor.methods({
     "insertColocInUser": function(colocId) {

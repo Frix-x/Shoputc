@@ -62,23 +62,25 @@
         </article>
     </div>
     {{else}}
+    <div class="col_2of3">
         {{> loadingTemplate}}
+    </div>
     {{/if}}
 </template>
 
 <template name="msgTemplate">
     {{#each recentMessages}}
         <p class="{{typeMsg}}">
-            <b>{{authorName}}</b> - {{livestamp createdAt}}<br>
+            <b style="color: #dd5555;">{{authorName}}</b> - <span style="color: #d1d1d1;">{{livestamp createdAt}}</span>
         </p>
         <p class="{{typeMsg}} bubble">
-            {{content}}
+            {{breakLines content}}
         </p>
     {{/each}}
 </template>
 <template name="msgAdd">
     <input type="text" id="newMsg" name="newMsg" class="chatinput" />
-    <a class="btn btn-primary">Envoyer</a>
+    <a href="#" class="btn btn-primary">Envoyer</a>
 </template>
 
 <template name="colocs_list">

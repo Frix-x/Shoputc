@@ -10,31 +10,13 @@ Messages.attachSchema(new SimpleSchema({
             if (this.isInsert) {
                 return Meteor.userId();
             }
-            else if (this.isUpsert) {
-                return {
-                    $setOnInsert: Meteor.userId()
-                };
-            }
             else {
                 this.unset();
             }
         }
     },
     createdAt: {
-        type: Date,
-        autoValue: function() {
-            if (this.isInsert) {
-                return new Date();
-            }
-            else if (this.isUpsert) {
-                return {
-                    $setOnInsert: new Date()
-                };
-            }
-            else {
-                this.unset();
-            }
-        }
+        type: Date
     },
     content: {
         type: String,
@@ -47,11 +29,6 @@ Messages.attachSchema(new SimpleSchema({
             if (this.isInsert) {
                 return Meteor.user().profile.coloc[0];
             }
-            else if (this.isUpsert) {
-                return {
-                    $setOnInsert: Meteor.user().profile.coloc[0]
-                };
-            }
             else {
                 this.unset();
             }
@@ -60,3 +37,4 @@ Messages.attachSchema(new SimpleSchema({
 }));
 
 Messages.permit('insert').ifLoggedIn().ifIsInColoc().apply();
+Messages.permit('update').ifLoggedIn().ifIsMyLastEntry().apply();
