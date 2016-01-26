@@ -147,22 +147,30 @@ Template.msgTemplate.helpers({
     }
 });
 
-function insertMessage(message){
+function insertMessage(message) {
     if (message.value != '') {
         var lastEntry = Messages.findOne({}, {
             sort: {
                 createdAt: -1
             }
         });
-        if ((lastEntry.author === Meteor.userId()) && (moment(moment(TimeSync.serverTime()).diff(lastEntry.createdAt)).format("mm") <= 3)) {
-            Messages.update({
-                _id: lastEntry._id
-            }, {
-                $set: {
+        if (lastEntry) {
+            if ((lastEntry.author === Meteor.userId()) && (moment(moment(TimeSync.serverTime()).diff(lastEntry.createdAt)).format("mm") <= 3)) {
+                Messages.update({
+                    _id: lastEntry._id
+                }, {
+                    $set: {
+                        createdAt: new Date(TimeSync.serverTime()),
+                        content: lastEntry.content + '\n' + message.value
+                    }
+                });
+            }
+            else {
+                Messages.insert({
                     createdAt: new Date(TimeSync.serverTime()),
-                    content: lastEntry.content + '\n' + message.value
-                }
-            });
+                    content: message.value
+                });
+            }
         }
         else {
             Messages.insert({
