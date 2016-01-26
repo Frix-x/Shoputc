@@ -4,6 +4,9 @@
 Shoplists = new Mongo.Collection("shoplists");
 
 Shoplists.attachSchema(new SimpleSchema({
+    name: {
+        type: String
+    },
     createdAt: {
         type: Date
     },
@@ -19,7 +22,12 @@ Shoplists.attachSchema(new SimpleSchema({
         max: 30
     },
     "item.$.checked": {
-        type: Boolean
+        type: Boolean,
+        autoValue: function() {
+            if (this.isInsert) {
+                return false;
+            }
+        }
     },
     coloc: {
         type: String,
@@ -34,7 +42,12 @@ Shoplists.attachSchema(new SimpleSchema({
         }
     },
     open: {
-        type: Boolean
+        type: Boolean,
+        autoValue: function() {
+            if (this.isInsert) {
+                return true;
+            }
+        }
     }
 }));
 

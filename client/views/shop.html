@@ -1,23 +1,53 @@
 <template name="shop">
     <div class="inner_container">
+        {{#if isInColoc}}
+        <div class="col_1of3">
+            <article class="box post">
+                <div class="details">
+                    <h2>Listes des listes</h2>
+                    <br>
+                    <a href="#" class="btn btn-block btn-primary">Nouvelle liste</a>
+                    {{> shoplists}}
+                </div>
+            </article>
+        </div>
+        <div class="col_2of3">
+            <article class="box post">
+                <div class="details">
+                    <h2>Titre de la liste</h2> LISTE ICI
+                </div>
+            </article>
+        </div>
+        {{else}}
         <div class="col_1of1">
             <article class="box post">
                 <div class="details">
-                    <h2>Listes de courses</h2>
+                    <h2>Bienvenue</h2>
                     <p>
-                        TODO :<br>- Liste de "liste de courses"<br>
-                        - Modification ajouts d'items, etc...
+                        Tu n'as pas encore de coloc, tu as l'air perdu ! Commence par rejoindre celle de tes amis ou créé la tienne tout de suite <a href="{{pathFor route='coloc'}}">ici</a> !
                     </p>
                 </div>
             </article>
         </div>
+        {{/if}}
     </div>
 </template>
 
-<template name="listShoplists">
-    Liste des listes de courses
-</template>
-
-<template name="shoplist">
-    Ici la liste de courses choisie
+<template name="shoplists">
+    <ul class="accordion flipIn">
+        <li class="accordion-item transition">
+            <input type="checkbox" checked>
+            <i></i>
+            <h3 class="no-select transition">Récentes</h3>
+            <p class="transition">Using the sibling and checked selectors, we can determine the styling of sibling elements based on the checked state of the checkbox input element. One use, as demonstrated here, is an entirely CSS and HTML accordion element. Media queries
+                are used to make the element responsive to different screen sizes.</p>
+        </li>
+        <li class="accordion-item transition">
+            <input type="checkbox" checked>
+            <i></i>
+            <h3 class="no-select transition">Archivées</h3>
+            <p class="transition">By making the open state default for when :checked isn't detected, we can make this system accessable for browsers that don't recognize :checked. The fallback is simply an open accordion. The accordion can be manipulated with Javascript (if
+                needed) by changing the "checked" property of the input element.</p>
+        </li>
+    </ul>
 </template>
